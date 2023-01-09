@@ -1,0 +1,196 @@
+/* body - The main body of the page. */
+body{
+    padding: 0;
+    margin: 0;
+    background-color: #f8fafc;
+}
+
+/**************************************************************************************************************************************/
+/**************************************************************************************************************************************/
+/* * - All elements in the file. */
+*{
+    box-sizing: border-box;
+}
+
+/**************************************************************************************************************************************/
+/**************************************************************************************************************************************/
+/* |font-section| */
+/* @font-face - Typographica font */
+@font-face{
+    font-family: typographica;
+    src: url(../font/typographica/TypoGraphica_demo.otf);
+}
+
+/* @font-face - Roboto font */
+@font-face{
+    font-family: roboto;
+    src: url(../font/roboto/Roboto-Regular.ttf);
+}
+
+/**************************************************************************************************************************************/
+/**************************************************************************************************************************************/
+/*|Header Section|*/
+/* header-section - The main header section in the browser. */
+#header-section{
+    border: 1px solid white;
+    border-radius: 7px;
+    box-shadow: 1px 1px 10px black;
+    margin: 0 auto;
+    margin-top: 30px;
+    width:500px;
+    text-align: center;
+}
+#header-section h1{
+    font-size: 3em;
+    letter-spacing: 7px;
+    font-family: typographica, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+#header-section p{
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+/**************************************************************************************************************************************/
+/**************************************************************************************************************************************/
+/*|User Button Section|*/
+/* user-button-section - The main new button section will contain a "New Book" button and "Clear Library" button. */
+#user-button-section{
+    border: 2px solid red;
+    margin: 40px auto;
+    width: 500px;
+    text-align: center;
+    padding: 10px;
+    font-family: roboto, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+.user-button{
+    font-size: 18px;
+    font-weight: bold;
+    padding: 7px 17px 7px 17px;
+    background-color: #a5f3fc;
+    border: 1px solid #a5f3fc;
+    border-radius: 5px;
+}
+.user-button:hover{
+    background-color:#a5f3fca2;
+    border: 1px solid white;
+    cursor: pointer;
+}
+
+/**************************************************************************************************************************************/
+/**************************************************************************************************************************************/
+/* |Book Info Section|Book Info Form| */
+/* book-info-section - The main section that will contain the form.*/
+#book-info-section{
+    border: 2px solid red;
+    margin: 0 auto;
+    width: 500px;
+    padding: 40px;
+    font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: 18px;
+}
+#book-info-section form{
+    border: 1px solid white;
+    border-radius: 7px;
+    box-shadow: 1px 1px 10px black;
+}
+#book-info-section form > div{
+    padding: 10px;
+    margin: 10px;
+    /* border: 2px solid green; */
+}
+#book-info-section form > div label{
+    display: block;
+}
+#book-info-section input[type]{
+    width: 100%;
+    border-radius: 7px;
+    border: 1px solid #52525b;
+    padding: 10px 0 10px 0;
+    font-size: 18px;
+    font-family: roboto, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+#book-info-section input[type]:focus{
+    border: 1px solid #e2e8f0;
+    outline: none;
+}
+
+/* Select Button */
+form > div:nth-child(4){
+    position: relative;
+}
+form > div:nth-child(4)::after{
+    content: "▼";
+    position: absolute;
+    left: 60px;
+    top: 43px;
+}
+form select{
+    appearance: none;
+    padding: 10px 40px 10px 5px;
+    border-radius: 5px;
+    border: 1pxs solid #52525b;
+    font-size: 18px;
+    cursor: pointer;
+}
+form select:focus{
+    border: 1px solid  #e2e8f0;
+    outline: none;
+}
+
+/* Submit Button */
+form button{
+    background-color: #a5f3fc;
+    border: 1px solid #a5f3fc;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 5px 10px 5px 10px;
+    font-size: 18px;
+}
+form button:hover{
+    background-color:#a5f3fcb2;
+    cursor: pointer;
+    border: 1px solid white;
+    outline: none;
+}
+
+/* Hide the book form by default until the user clicks on the new book button. */
+.hide-book-form{
+    display: none;
+}
+
+/**************************************************************************************************************************************/
+/**************************************************************************************************************************************/
+/* |Library Display Section| */
+/* library-display-section - The main section that will display the users book library. */
+#library-display-section{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+    gap: 25px;
+
+    border: 2px solid red;
+    margin: 0 auto;
+    width: 1000px;
+    padding: 40px;
+    margin-top: 40px;
+    font-family: roboto, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+#library-display-section > div{
+    /* border: 2px solid green; */
+    font-size: 18px;
+    padding: 10px;
+    box-shadow: 1px 1px 15px  black;
+    border-radius: 7px;
+    border: 1px solid white;
+    background-color: white;
+}
+.display-buttons{
+    font-size: 17px;
+    padding: 5px 10px 5px 10px;
+    margin: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+.display-buttons:hover{
+    background-color: #93c5fd;
+    border: 1px solid #93c5fd;
+}
