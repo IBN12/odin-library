@@ -54,7 +54,6 @@ body{
 /*|User Button Section|*/
 /* user-button-section - The main new button section will contain a "New Book" button and "Clear Library" button. */
 #user-button-section{
-    border: 2px solid red;
     margin: 40px auto;
     width: 500px;
     text-align: center;
@@ -80,7 +79,6 @@ body{
 /* |Book Info Section|Book Info Form| */
 /* book-info-section - The main section that will contain the form.*/
 #book-info-section{
-    border: 2px solid red;
     margin: 0 auto;
     width: 500px;
     padding: 40px;
@@ -95,7 +93,6 @@ body{
 #book-info-section form > div{
     padding: 10px;
     margin: 10px;
-    /* border: 2px solid green; */
 }
 #book-info-section form > div label{
     display: block;
@@ -167,7 +164,6 @@ form button:hover{
     grid-template-rows: auto;
     gap: 25px;
 
-    border: 2px solid red;
     margin: 0 auto;
     width: 1000px;
     padding: 40px;
@@ -175,7 +171,6 @@ form button:hover{
     font-family: roboto, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 #library-display-section > div{
-    /* border: 2px solid green; */
     font-size: 18px;
     padding: 10px;
     box-shadow: 1px 1px 15px  black;
@@ -193,4 +188,5 @@ form button:hover{
 .display-buttons:hover{
     background-color: #93c5fd;
     border: 1px solid #93c5fd;
+    cursor: pointer;
 }

@@ -2,19 +2,9 @@
 // Program: javascript.js
 // Description: JavaScript file for the library application
 // Source Assignment: https://www.theodinproject.com/lessons/node-path-javascript-library#assignment
-// Assignment: 
-//
-//
-//
-// Notes:
-// -> Create a display section to display the book objects. First method to display the content (1)
-// const displayBook = document.createElement('div');
-// for(let prop in myBook){
-//     const displayBookChildren = document.createElement('div');
-//     displayBookChildren.textContent = myBook[prop];
-//     displayBook.appendChild(displayBookChildren);
-// }
-// libraryDisplay.appendChild(displayBook);
+// Assignment: Create a book library app. Each book will be a object that stores the book title,
+// author, pages, and if the user has read the book or not. The user can add a new book to the
+// library and remove a book from the library.  
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Reference node for the 'new button'.
@@ -39,38 +29,45 @@ const bookAuthor = document.querySelector('#book-info-section > form div:nth-chi
 const bookPages = document.querySelector('#book-info-section > form div:nth-child(3) input'); 
 const bookRead = document.querySelector('#book-info-section > form div:nth-child(4) select');
 
-/*************************************************************************************************************************************************/
-// Testing
-console.log(bookTitle);
-console.log(bookAuthor); 
-console.log(bookPages); 
-console.log(bookRead);
-console.log(bookFormSubmitButton); 
-console.log(bookForm);
-console.log(newButton); 
-console.log(clearButton);
-console.log(libraryDisplay);
-/*************************************************************************************************************************************************/
-
 // Array[] - myLibrary[]
 let myLibrary = []
-console.log(myLibrary); // Testing
-console.log("\n");
 
-// Object Constructor - Book()
-function Book(){
-    this.Title = bookTitle.value;
-    this.Author = bookAuthor.value;
-    this.Pages = bookPages.value;
-    this.Read = bookRead.value;
-}
+// class Book - For abstract coding
+class Book{
+    constructor(){
+        this.Title = bookTitle.value;
+        this.Author = bookAuthor.value;
+        this.Pages = bookPages.value;
+        this.Read = bookRead.value;
+    }
+};
 
 // Add new content to the library.
 function addBookToLibrary(e){
     e.preventDefault(); // prevent the form from redirecting.
 
+    // hide the book form.
     bookForm.classList.add('hide-book-form');
+
+    // declare and initialize a new object of type Book.
     let myBook = new Book();
+
+    // Each form control will have a non-applicable value if the user chooses not to enter any values into the form.
+    if (myBook.Title === "")
+    {
+        myBook.Title = "N/A";
+    }
+
+    if (myBook.Author === "")
+    {
+        myBook.Author = "N/A";
+    }
+
+    if (myBook.Pages === "")
+    {
+        myBook.Pages = "N/A";
+    }
+
     myLibrary.push(myBook);
     displayBooks();
 }
@@ -87,8 +84,6 @@ function displayBooks(){
     let index = 0;
     // Will loop over each book object in the array. 
     myLibrary.forEach(bookObjs => {
-        console.log(`my current library of book objects: ${myLibrary}`); // Testing 
-
         // Create display items for the library display section.
         const libraryDisplayItems = document.createElement('div');
 
@@ -100,13 +95,12 @@ function displayBooks(){
         // Link the data attribute 'linkedArray' to our DOM Element 'removeButton' and set the attribute property to 'index'.
         // This is being linked through the DOM (Documentation Object Model)
         removeButton.dataset.linkedArray = index;
-        console.log(`The dataset link back to the array: ${removeButton.dataset.linkedArray}`); // Testing
 
         // Will remove a book object if the user chooses so. 
         removeButton.addEventListener('click', () => {
             let retrieveBookToRemove = removeButton.dataset.linkedArray;
             myLibrary.splice(parseInt(retrieveBookToRemove), 1); // remove the object that corresponds to the HTMLElements data-attribute index. 
-            libraryDisplayItems.remove(); // Remove the entires card from the library display section. 
+            libraryDisplayItems.remove(); // Remove the entire card from the library display section. 
             displayBooks();
         });
 
@@ -116,7 +110,6 @@ function displayBooks(){
 
         // Link the data attribute 'linkedArray' to our DOM Element 'toggleReadButton' and set the attribute property to 'index'.
         toggleReadButton.dataset.linkedArray = index;
-        console.log("The toggle data-attribute value: ", toggleReadButton.dataset.linkedArray); // Testing
 
         // Will change the text on the button if the user has read the book or not.
         if (bookObjs.Read === 'Yes')
@@ -128,12 +121,12 @@ function displayBooks(){
             toggleReadButton.textContent = 'Not Read';
         }
 
-        // Will toggle a book object that thes use has read or hasn't read. 
+        // Will toggle a book object that the user has read or hasn't read. 
         toggleReadButton.addEventListener('click', () => {
             let retrieveBookToToggle = toggleReadButton.dataset.linkedArray;
             const newBook = new Book();
-            console.log("The initial value of the toggle Button: ", myLibrary[parseInt(retrieveBookToToggle)].Read); // Testing
 
+            // Implement toggle data.
             if(myLibrary[parseInt(retrieveBookToToggle)].Read === 'No')
             {
                 newBook.Read = 'Yes';
@@ -149,7 +142,6 @@ function displayBooks(){
 
         // Will loop over each property key in the selected book object.
         for (let key in bookObjs){
-            console.log(`${key}: ${bookObjs[key]}`); // Testing
             const para = document.createElement('p');
             para.textContent = `${key}: ${bookObjs[key]}`;
             libraryDisplayItems.appendChild(para);
@@ -166,7 +158,7 @@ function displayBooks(){
 
 // New Button - Will display a new set of form controls when the user clicks the button after each library display.
 newButton.addEventListener('click', () => {
-    bookForm.classList.remove('hide-book-form');
+    bookForm.classList.remove('hide-book-form'); // Display the form controls.
     bookForm.reset(); // Reset the form controls 
 });
 
@@ -175,7 +167,6 @@ bookFormSubmitButton.addEventListener('click', addBookToLibrary);
 
 // Clear Button - Will clear the entire book library and reset the form controls.
 clearButton.addEventListener('click', () => {
-    console.log("Clicked Clear Button!"); // Testing
     // Remove all books from the library by removing all the nodes from the display section.
     var child = libraryDisplay.lastElementChild;
     while(child){
