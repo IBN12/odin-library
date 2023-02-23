@@ -46,27 +46,60 @@ class Book{
 function addBookToLibrary(e){
     e.preventDefault(); // prevent the form from redirecting.
 
+    // Validity checks without novalidate form attribute in the HTML file. 
+    // Book title validity check.
+    if (bookTitle.validity.valueMissing)
+    {
+        bookTitle.setCustomValidity("You forgot to enter a book title.");
+        bookTitle.reportValidity(); // Need to report the validity in order to transfer validity value. 
+        return;
+    }
+    else
+    {
+        bookTitle.setCustomValidity("");
+    }
+
+    // Book author validity check.
+    if (bookAuthor.validity.valueMissing)
+    {
+        bookAuthor.setCustomValidity("You forgot to enter a book author.");
+        bookAuthor.reportValidity();
+        return;
+    }
+    else
+    {
+        bookAuthor.setCustomValidity("");
+    }
+
+    // Book pages validity check.
+    if (bookPages.validity.valueMissing)
+    {
+        bookPages.setCustomValidity("You forgot to enter the book pages.");
+        bookPages.reportValidity();
+        return;
+    }
+    else if(bookPages.validity.rangeUnderflow)
+    {
+        bookPages.setCustomValidity("The book pages is below the min range of 1 page.");
+        bookPages.reportValidity();
+        return;
+    }
+    else if(bookPages.validity.rangeOverflow)
+    {
+        bookPages.setCustomValidity("The book pages exceeds the max range of 3000 pages.");
+        bookPages.reportValidity();
+        return;
+    }
+    else
+    {
+        bookPages.setCustomValidity("");
+    }
+
     // hide the book form.
     bookForm.classList.add('hide-book-form');
 
     // declare and initialize a new object of type Book.
     let myBook = new Book();
-
-    // Each form control will have a non-applicable value if the user chooses not to enter any values into the form.
-    if (myBook.Title === "")
-    {
-        myBook.Title = "N/A";
-    }
-
-    if (myBook.Author === "")
-    {
-        myBook.Author = "N/A";
-    }
-
-    if (myBook.Pages === "")
-    {
-        myBook.Pages = "N/A";
-    }
 
     myLibrary.push(myBook);
     displayBooks();
@@ -114,11 +147,11 @@ function displayBooks(){
         // Will change the text on the button if the user has read the book or not.
         if (bookObjs.Read === 'Yes')
         {
-            toggleReadButton.textContent = 'Read';
+            toggleReadButton.textContent = 'Not Read';
         }
         else if (bookObjs.Read === 'No')
         {
-            toggleReadButton.textContent = 'Not Read';
+            toggleReadButton.textContent = 'Read';
         }
 
         // Will toggle a book object that the user has read or hasn't read. 
@@ -146,7 +179,6 @@ function displayBooks(){
             para.textContent = `${key}: ${bookObjs[key]}`;
             libraryDisplayItems.appendChild(para);
         }
-        console.log("\n");
         
         // libraryDisplayItems.appendChild(toggleReadButton); 
         libraryDisplayItems.appendChild(toggleReadButton);
@@ -162,7 +194,7 @@ newButton.addEventListener('click', () => {
     bookForm.reset(); // Reset the form controls 
 });
 
-// Submit Button - Submits the form to display the book library. 
+// Submit Button - Submits the form to display the book library. ('submit' or 'clicked')
 bookFormSubmitButton.addEventListener('click', addBookToLibrary);
 
 // Clear Button - Will clear the entire book library and reset the form controls.
@@ -174,11 +206,9 @@ clearButton.addEventListener('click', () => {
         child = libraryDisplay.lastElementChild;
     }
 
-    var index = 0;
     // Remove all the objects that are books from the library array.
     while(myLibrary.length != 0){
         myLibrary.splice(0, 1);
-        index++;
     }
 
     // Reset the form controls just in case.
