@@ -190,3 +190,98 @@ form button:hover{
     border: 1px solid #93c5fd;
     cursor: pointer;
 }
+
+
+/**************************************************************************************************************************************/
+/**************************************************************************************************************************************/
+/* Media queries for mobiles and tablet devices. */
+/* media-1 - For desktop and tablet devices. (iPad Air, iPad Mini,  */
+@media screen and (max-width: 1000px){
+    /* Header Section */
+    #header-section{
+        width: 80%;
+    }
+    #header-section h1{
+        font-size: 2em;
+    }
+
+    /* User Button Section */
+    #user-button-section{
+        width: 100%;
+    }
+
+    /* Book Info Section */
+    #book-info-section{
+        width: 100%; 
+    }
+
+    /* Library Display Section */
+    #library-display-section{
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+
+        width: 100%;
+    }
+}
+
+/* media-2 - For mobile devices. */
+@media screen and (max-width: 600px){
+    /* Header Section */
+    #header-section{
+        width: 90%;
+    }
+    #header-section h1{
+        font-size: 2em;
+    }
+
+    /* User Button Section */
+    #user-button-section{
+        width: 100%;
+    }
+
+    /* Book Info Section */
+    #book-info-section{
+        width: 100%; 
+    }
+
+    /* Library Display Section */
+    #library-display-section{
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+
+        width: 100%;
+    }
+}
+
+/* media-3 - For mobile devices with a smaller viewport. */
+@media screen and (max-width: 290px){
+    /* Header Section */
+    #header-section{
+        width: 90%;
+    }
+    #header-section h1{
+        font-size: 25px;
+    }
+
+    /* User Button Section */
+    #user-button-section{
+        width: 100%;
+    }
+    .user-button{
+        font-size: 15px;
+    }
+
+    /* Book Info Section */
+    #book-info-section{
+        width: 100%; 
+    }
+
+    /* Library Display Section */
+    #library-display-section{
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+
+        width: 100%;
+        padding: 10px;
+    }
+}
